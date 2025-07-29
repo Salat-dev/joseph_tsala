@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Tsalase Joseph - Designer Web & Graphique, Expert UI/UX et Développeur FullStack">
+    <title>Tsalase Joseph - Designer Web & Développeur FullStack</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="src/css/components.css">
+    <link rel="stylesheet" href="src/css/dark-mode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Ajoutez ces styles pour le menu mobile */
+@media (max-width: 768px) {
+    .nav-list {
+        display: none; /* Caché par défaut sur mobile */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .nav-list li {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 0.75rem 0;
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: block; /* Affiché sur mobile */
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-primary);
+    }
+
+    .auth-buttons {
+        display: none; /* Vous pouvez aussi les déplacer dans le menu si vous préférez */
+    }
+}
+
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none; /* Caché sur desktop */
+    }
+
+    .nav-list {
+        display: flex !important; /* Toujours visible sur desktop */
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h2>TSALA SE</h2>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="" class="nav-link active">Accueil</a></li>
+                    <li><a href="../pages/about.html" class="nav-link">À propos</a></li>
+                    <li><a href="../pages/projects.html" class="nav-link">Projets</a></li>
+                    <li><a href="../pages/experience.html" class="nav-link">Expérience</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button id="loginBtn" class="btn btn-outline" onclick="window.location.href='../pages/contact.html'">Contact</button>        
+                    </div>
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="highlight">Designer Web</span> & 
+                    <span class="highlight">Développeur FullStack</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Création d'expériences numériques exceptionnelles qui allient esthétique et fonctionnalité
+                </p>
+                <div class="hero-actions">
+                    <a href="./projects.html" class="btn btn-primary">Voir mes projets</a>
+                    <a href="./contact.html" class="btn btn-outline">Me contacter</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-placeholder" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 20%;">
+                   <!-- <img src="/portfolio/public/images/moi.jpeg" alt="Tsalase Joseph" 
+                         style="max-width: 100%; height: auto; display: block; object-fit: contain; border-radius: inherit;"> --> 
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Mes Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Design Graphique</h3>
+                    <p>Création d'identités visuelles, supports de communication et visuels pour réseaux sociaux</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Développement Web</h3>
+                    <p>Sites web modernes, applications web et solutions e-commerce avec les dernières technologies</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>Interfaces utilisateur intuitives et expériences utilisateur optimisées pour tous les supports</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-preview">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>À propos de moi</h2>
+                    <p>
+                        Analyste programmeur, designer UI/UX et designer graphique polyvalent, 
+                        je suis animé par le désir de contribuer au succès des projets. 
+                        Doté d'une grande curiosité et d'un sens aigu de l'innovation, 
+                        je suis constamment à la recherche de nouvelles façons d'optimiser 
+                        les processus et d'améliorer l'expérience utilisateur.
+                    </p>
+                    <a href="./" class="btn btn-primary">En savoir plus</a>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <h3>3+</h3>
+                        <p>Années d'expérience</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>20+</h3>
+                        <p>Projets réalisés</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>5+</h3>
+                        <p>Compétences techniques</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="logo">
+                        <h3>TSALASE</h3>
+                    </div>
+                    <p>Designer Web & Graphique, Expert UI/UX et Développeur FullStack</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#home">Accueil</a></li>
+                        <li><a href="src/pages/about.html">À propos</a></li>
+                        <li><a href="src/pages/projects.html">Projets</a></li>
+                        <li><a href="src/pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-moi</h4>
+                    <div class="social-links">
+                        <a href="www.linkedin.com/in/joseph-tsala-se"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tsalase Joseph. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget -->
+    <div id="chatWidget" class="chat-widget">
+        <div class="chat-header">
+            <h4>Chat</h4>
+            <button id="closeChat" class="chat-close">&times;</button>
+        </div>
+        <div class="chat-messages">
+            <!-- Messages will be loaded here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="messageInput" placeholder="Tapez votre message...">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="auth-form">
+                <h2 id="authTitle">Connexion</h2>
+                <form id="authForm">
+                    <div class="form-group">
+                        <input type="email" id="authEmail" placeholder="Votre email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="authPassword" placeholder="Mot de passe" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Continuer</button>
+                </form>
+                <div class="auth-options">
+                    <button id="googleLogin" class="btn btn-google">
+                        <i class="fab fa-google"></i> Continuer avec Google
+                    </button>
+                    <p id="switchAuthText">
+                        Pas encore de compte? <a href="#" id="switchToSignup">S'inscrire</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/js/main.js"></script>
+    <script src="src/js/auth.js"></script>
+    <script src="src/js/chat.js"></script>
+    <script src="src/js/notifications.js"></script>
+
+    <script>
+        // Gestion du menu mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navList = document.querySelector('.nav-list');
+    
+            if (menuToggle && navList) {
+                menuToggle.addEventListener('click', function() {
+                    navList.style.display = navList.style.display === 'flex' ? 'none' : 'flex';
+                });
+            }
+    
+            // Fermer le menu si on clique sur un lien (utile surtout sur mobile)
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        navList.style.display = 'none';
+                    }
+                });
+            });
+    
+            // Gestion du redimensionnement de la fenêtre
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navList.style.display = 'flex';
+                } else {
+                    navList.style.display = 'none';
+                }
+            });
+        });
+    
+        // Script existant pour le chat, auth, etc.
+        // ... (le reste de vos scripts existants)
+    </script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Créer un compte - Tsalase Joseph">
+    <title>Inscription - Tsalase Joseph</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: var(--background);
+            font-family: var(--font-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem;
+        }
+
+        .auth-container {
+            background-color: var(--background);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 450px;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .auth-header p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .auth-form {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius-md);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group input:invalid {
+            border-color: var(--error);
+        }
+
+        .terms {
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .terms label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .terms a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-google {
+            background-color: #4285f4;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-google:hover {
+            background-color: #3367d6;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: var(--error);
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error);
+            border-radius: var(--border-radius-md);
+            padding: 0.75rem;
+            margin-bottom: 1.25rem;
+            display: none;
+        }
+
+        .success-message {
+            color: var(--success);
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success);
+            border-radius: var(--border-radius-md);
+            padding: 0.75rem;
+            margin-bottom: 1.25rem;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 1.5rem;
+            }
+            
+            .auth-header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>Créer un compte</h1>
+            <p>Rejoignez-nous dès aujourd'hui</p>
+        </div>
+        
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
+        
+        <form id="registerForm" class="auth-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">Prénom</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName">Nom</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" minlength="6" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmPassword">Confirmer le mot de passe</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            
+            <div class="terms">
+                <label>
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <span>J'accepte les <a href="#">Conditions d'utilisation</a> et la <a href="#">Politique de confidentialité</a></span>
+                </label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </form>
+        
+        <button id="googleRegister" class="btn btn-google">
+            <i class="fab fa-google"></i> S'inscrire avec Google
+        </button>
+        
+        <div class="auth-footer">
+            <p>Déjà un compte? <a href="login.html">Se connecter</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('registerForm');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Masquer les messages au départ
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const terms = document.getElementById('terms').checked;
+                
+                // Validation
+                if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                    showError('Veuillez remplir tous les champs');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showError('Les mots de passe ne correspondent pas');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    showError('Le mot de passe doit contenir au moins 6 caractères');
+                    return;
+                }
+                
+                if (!terms) {
+                    showError('Veuillez accepter les conditions d\'utilisation');
+                    return;
+                }
+                
+                // Simulation d'inscription
+                simulateRegister(firstName, lastName, email, password);
+            });
+            
+            document.getElementById('googleRegister').addEventListener('click', function() {
+                // Simulation d'inscription Google
+                simulateGoogleRegister();
+            });
+            
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                
+                // Cacher automatiquement après 5 secondes
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+            }
+            
+            function showSuccess(message) {
+                successMessage.textContent = message;
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+                
+                // Cacher automatiquement après 5 secondes
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            }
+            
+            function simulateRegister(firstName, lastName, email, password) {
+                // Simulation d'un délai de chargement
+                const submitButton = registerForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+                submitButton.textContent = 'Inscription en cours...';
+                submitButton.disabled = true;
+                
+                // Simulation d'une requête API
+                setTimeout(() => {
+                    // Réinitialiser le bouton
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                    
+                    // Vérification si l'email existe déjà (simulation)
+                    if (email === 'existing@example.com') {
+                        showError('Cet email est déjà utilisé');
+                    } else {
+                        // Inscription réussie
+                        showSuccess('Compte créé avec succès! Vous allez être redirigé vers la page de connexion.');
+                        
+                        // Redirection vers la page de connexion après 2 secondes
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 2000);
+                    }
+                }, 1500);
+            }
+            
+            function simulateGoogleRegister() {
+                const googleButton = document.getElementById('googleRegister');
+                const originalText = googleButton.innerHTML;
+                googleButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Inscription avec Google...';
+                googleButton.disabled = true;
+                
+                // Simulation d'une inscription Google
+                setTimeout(() => {
+                    googleButton.innerHTML = originalText;
+                    googleButton.disabled = false;
+                    
+                    // Simulation d'une inscription réussie
+                    showSuccess('Compte créé avec Google! Vous allez être redirigé.');
+                    
+                    // Redirection vers la page d'accueil après 2 secondes
+                    setTimeout(() => {
+                        window.location.href = '../../index.html';
+                    }, 2000);
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>

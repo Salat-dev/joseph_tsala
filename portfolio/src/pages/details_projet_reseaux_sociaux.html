@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Détails du projet Visuels pour réseaux sociaux - Tsalase Joseph">
+    <title>Visuels Réseaux Sociaux - Détails du projet - Tsalase Joseph</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Ajout d'un espacement en haut pour compenser le header fixe */
+        .project-detail-section {
+            padding-top: 100px;
+            background-color: var(--background);
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        .project-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .project-header {
+            margin-bottom: 2rem;
+        }
+
+        .project-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .project-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-gallery {
+            margin-bottom: 2rem;
+        }
+
+        .gallery-main {
+            margin-bottom: 1rem;
+        }
+
+        .gallery-main img,
+        .gallery-main video {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+        }
+
+        .thumbnail {
+            width: 100px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .thumbnail.active {
+            border-color: var(--primary);
+        }
+
+        .project-content {
+            background-color: var(--surface);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .project-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .project-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .project-features {
+            margin-bottom: 2rem;
+        }
+
+        .project-features h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .feature-icon {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 0.25rem;
+        }
+
+        .feature-content h4 {
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .feature-content p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .project-detail-section {
+                padding-top: 80px;
+            }
+
+            .project-header h1 {
+                font-size: 2rem;
+            }
+
+            .project-content {
+                padding: 1.5rem;
+            }
+
+            .project-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .gallery-main img,
+            .gallery-main video {
+                height: 250px;
+            }
+
+            .thumbnail {
+                width: 80px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-detail-section {
+                padding-top: 70px;
+            }
+
+            .project-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .project-meta {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .project-content {
+                padding: 1rem;
+            }
+
+            .project-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h2>TSALASE</h2>
+            </div>
+      <!--       <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="../../index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="about.html" class="nav-link">À propos</a></li>
+                    <li><a href="projects.html" class="nav-link">Projets</a></li>
+                    <li><a href="experience.html" class="nav-link">Expérience</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button id="loginBtn" class="btn btn-outline">Connexion</button>
+                    <button id="signupBtn" class="btn btn-primary">Inscription</button>
+                </div>
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav> -->
+        </div>
+    </header>
+
+    <!-- Project Detail Section -->
+    <section class="project-detail-section">
+        <div class="project-detail-container">
+            <a href="projects.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Retour aux projets
+            </a>
+
+            <div class="project-header">
+                <h1>Visuels pour réseaux sociaux</h1>
+                <div class="project-tags">
+                    <span class="tag">Design</span>
+                    <span class="tag">Social Media</span>
+                    <span class="tag">Graphisme</span>
+                    <span class="tag">Freelance</span>
+                </div>
+                <div class="project-meta">
+                    <span><i class="fas fa-calendar"></i> 2023-2024</span>
+                    <span><i class="fas fa-map-marker-alt"></i> Freelance</span>
+                    <span><i class="fas fa-user"></i> Tsalase Joseph</span>
+                </div>
+            </div>
+
+            <div class="project-gallery">
+
+            <div class="project-content">
+                <h2>Description du projet</h2>
+                <p>
+                    Dans le cadre de diverses missions freelance, j'ai eu l'opportunité de créer une série de visuels 
+                    destinés aux réseaux sociaux pour différents clients. Ces créations visuelles visent à renforcer 
+                    la présence en ligne des marques, à engager leur audience et à communiquer efficacement leurs messages.
+                </p>
+                <p>
+                    Chaque ensemble de visuels est conçu en tenant compte de l'identité visuelle spécifique du client, 
+                    des tendances actuelles du design social media, et des spécificités de chaque plateforme 
+                    (Instagram, Facebook, LinkedIn, etc.).
+                </p>
+
+                <div class="project-features">
+                    <h3>Types de visuels réalisés</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Publications</h4>
+                                <p>Posts illustrés pour annoncer des événements, produits ou services</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Stories</h4>
+                                <p>Contenus éphémères et interactifs pour un engagement immédiat</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Infographies</h4>
+                                <p>Visualisation de données et d'informations complexes</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Citations</h4>
+                                <p>Designs inspirants pour renforcer la notoriété de la marque</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Processus de création</h3>
+                <p>
+                    Le processus commence par une compréhension approfondie des objectifs du client et de son audience cible. 
+                    Je collabore étroitement avec eux pour définir le message clé, le ton de la communication et les éléments 
+                    visuels à mettre en avant.
+                </p>
+                <p>
+                    La création elle-même s'appuie sur une veille graphique constante et l'utilisation d'outils professionnels 
+                    comme Adobe Photoshop, Figma et Canva. L'attention portée aux détails, à la typographie, aux couleurs 
+                    et à la hiérarchie visuelle garantit des visuels percutants et cohérents.
+                </p>
+
+                <h3>Impact et résultats</h3>
+                <p>
+                    Ces visuels ont contribué à améliorer significativement la présence en ligne des clients, 
+                    avec une augmentation de l'engagement et de la visibilité sur les réseaux sociaux. 
+                    Le travail de design graphique a permis de renforcer l'identité visuelle des marques 
+                    et de créer une cohérence forte dans leur communication numérique.
+                </p>
+                <p>
+                    Ce type de mission freelance m'a permis de développer une expertise spécifique dans le design 
+                    pour les réseaux sociaux, en comprenant les subtilités de chaque plateforme et les attentes 
+                    des différentes audiences.
+                </p>
+            </div>
+
+            <div class="project-actions">
+                <a href="#" class="btn btn-outline">
+                    <i class="fas fa-images"></i> Voir plus de visuels
+                </a>
+                <a href="contact.html" class="btn btn-outline">
+                    <i class="fas fa-comments"></i> Commander des visuels
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="logo">
+                        <h3>TSALASE</h3>
+                    </div>
+                    <p>Designer Web & Graphique, Expert UI/UX et Développeur FullStack</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../../index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="projects.html">Projets</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-moi</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tsalase Joseph. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gestion de la galerie d'images
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const mainMedia = document.getElementById('mainMedia');
+            
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    // Retirer la classe active de toutes les miniatures
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    
+                    // Ajouter la classe active à la miniature cliquée
+                    this.classList.add('active');
+                    
+                    // Obtenir la source de l'image
+                    const src = this.getAttribute('data-src');
+                    
+                    // Mettre à jour le média principal (toujours une image pour ce projet)
+                    mainMedia.outerHTML = `<img id="mainMedia" src="${src}" alt="Projet principal" class="gallery-main-image">`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

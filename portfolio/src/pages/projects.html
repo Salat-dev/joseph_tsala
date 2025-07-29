@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projets de Tsalase Joseph - Designer Web & Graphique, Expert UI/UX et Développeur FullStack">
+    <title>Projets - Tsalase Joseph</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <!-- <link rel="stylesheet" href="../css/dark-mode.css"> Si vous utilisez le mode sombre -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Ajout d'un espacement en haut pour compenser le header fixe */
+        .projects-section {
+            padding-top: 100px; /* Hauteur du header + un peu d'espace */
+            background-color: var(--background);
+            min-height: calc(100vh - 100px); /* Prendre en compte le padding-top */
+            padding-bottom: 2rem; /* Espace en bas */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* === Styles spécifiques pour la Navbar Responsive === */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: var(--spacing-md);
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            font-weight: 500;
+            text-decoration: none;
+            padding: var(--spacing-xs) 0;
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width var(--transition-fast);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        /* Bouton Hamburger */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-primary);
+            transition: all 0.3s linear;
+            position: relative;
+            transform-origin: center;
+        }
+
+        /* États pour l'animation du hamburger */
+        .menu-toggle.active .hamburger-line:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .hamburger-line:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Styles pour le menu mobile */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-list {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: var(--spacing-xl);
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 1000;
+                padding: 0;
+                margin: 0;
+            }
+
+            .nav-list.active {
+                transform: translateX(0);
+            }
+
+            .nav-list li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-link {
+                font-size: var(--font-size-xl);
+                padding: var(--spacing-sm) 0;
+            }
+
+            /* Styles pour les boutons dans le menu mobile */
+            .mobile-auth-buttons {
+                display: flex !important;
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                width: 80%;
+                margin-top: var(--spacing-md);
+                padding-top: var(--spacing-lg);
+                border-top: 1px solid var(--border);
+            }
+
+            .mobile-auth-buttons .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Cacher les boutons desktop sur mobile */
+            .auth-buttons {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            /* Cacher les boutons mobile sur desktop */
+            .mobile-auth-buttons {
+                display: none !important;
+            }
+        }
+
+        /* Empêcher le scroll quand le menu est ouvert */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* === Styles pour la section Projets === */
+        .projects-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            background-color: var(--background-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-image {
+            background-color: #f0f9ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .project-placeholder {
+            font-size: 3rem;
+            color: var(--primary);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .project-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .project-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-actions {
+            margin-top: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--text-primary);
+            color: white;
+            padding: 2rem 0 1rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer h3, .footer h4 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer p {
+            color: #cbd5e1;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .projects-section {
+                padding-top: 120px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-section {
+                padding-top: 100px;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .projects-filter {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .projects-section {
+                padding-top: 90px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .project-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h2>TSALASE</h2>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="about.html" class="nav-link">À propos</a></li>
+                    <li><a href="projects.html" class="nav-link active">Projets</a></li>
+                    <li><a href="experience.html" class="nav-link">Expérience</a></li>
+                    <!-- Boutons d'authentification pour le menu mobile -->
+                    <li class="mobile-auth-buttons">
+                        <button id="loginBtn" class="btn btn-outline" onclick="window.location.href='../pages/contact.html'">Contact</button>        
+
+                    </li>
+                </ul>
+                <!-- Boutons d'authentification pour desktop -->
+                <div class="auth-buttons">
+                    <button id="loginBtn" class="btn btn-outline" onclick="window.location.href='../pages/contact.html'">Contact</button>        
+
+                </div>
+                <!-- Bouton hamburger pour mobile -->
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Mes Projets</h1>
+                <p>Découvrez mes réalisations les plus récentes</p>
+            </div>
+            
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="design">Design</button>
+                <button class="filter-btn" data-filter="karate">Karate</button>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Projet 1: Application de gestion des compétitions de karaté -->
+                <div class="project-card" data-category="karate web">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Web</span>
+                            <span class="tag">React JS</span>
+                            <span class="tag">UML</span>
+                            <span class="tag">Supabase</span>
+
+                        </div>
+                        <h3>Application de gestion des compétitions de karaté</h3>
+                        <p>
+                            Analyse du système avec UML, conception et réalisation d'une application complète 
+                            de gestion des compétitions de karaté avec charte graphique et identité visuelle.
+                        </p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2024</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Fédération Camerounaise de Karaté</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="details_projet.html" class="btn btn-outline btn-small">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 2: Site web restaurant Kem Tchop -->
+                <div class="project-card" data-category="web design">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Web</span>
+                            <span class="tag">No-Code</span>
+                            <span class="tag">Design</span>
+                        </div>
+                        <h3>Site web restaurant Kem Tchop</h3>
+                        <p>
+                            Conception du site web avec fonctionnalités de réservation en ligne, 
+                            formulaire de contact, blog et page d'accueil. Réalisation des visuels 
+                            et supports comme les cartes de menus.
+                        </p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2024</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Kem Tchop</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="details_projet_kem_tchop.html" class="btn btn-outline btn-small">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 3: Application de gestion des patients -->
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Web</span>
+                            <span class="tag">FullStack</span>
+                            <span class="tag">React JS</span>
+                            <span class="tag">SprigBoot</span>
+
+                        </div>
+                        <h3>Application de gestion des patients</h3>
+                        <p>
+                            Analyse du système de l'entreprise avec UML, mise en place, conception 
+                            et réalisation d'une application de gestion des patients pour MyLumen.
+                        </p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2023</span>
+                            <span><i class="fas fa-map-marker-alt"></i> MyLumen</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="details_projet_patients.html" class="btn btn-outline btn-small">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 4: Visuels pour réseaux sociaux -->
+                <div class="project-card" data-category="design">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-hashtag"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Design</span>
+                            <span class="tag">Social Media</span>
+                            <span class="tag">Graphisme</span>
+                            <span class="tag">Canvas</span>
+                            <span class="tag">Adobe Photoshop</span>
+
+
+                        </div>
+                        <h3>Visuels pour réseaux sociaux</h3>
+                        <p>
+                            Réalisation de visuels pour les contenus des réseaux sociaux 
+                            dans le cadre de missions freelance pour divers clients.
+                        </p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2023-2024</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Freelance</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="details_projet_reseaux_sociaux.html" class="btn btn-outline btn-small">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 5: Participation aux championnats de karaté -->
+                <div class="project-card" data-category="karate">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Karate</span>
+                            <span class="tag">Organisation</span>
+                            <span class="tag">Coordination</span>
+                            <span class="tag">SportData</span>
+
+                        </div>
+                        <h3>Participation aux championnats de karaté</h3>
+                        <p>
+                            Mise en place du dispositif de compétition : tatami, câblage, 
+                            installation et configuration des écrans, arbitrage numérique, 
+                            timing et projection des scores pendant les combats.
+                        </p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2021-2024</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Fédération Camerounaise de Karaté</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="details_projet_championnats.html" class="btn btn-outline btn-small">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 6: Service bureautique -->
+                <div class="project-card" data-category="karate">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-print"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Bureautique</span>
+                            <span class="tag">Impression</span>
+                            <span class="tag">Organisation</span>
+                        </div>
+                        <h3>Service bureautique</h3>
+                        <p>
+                            Impression des documents de compétition (badges, tirage au sort, etc.) 
+                            et gestion administrative lors des championnats de karaté.
+                        </p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2021-2024</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Fédération Camerounaise de Karaté</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="details_projet_bureautique.html" class="btn btn-outline btn-small">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 7: Branding pour Olugux -->
+                <div class="project-card" data-category="design branding">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Branding</span>
+                            <span class="tag">Identité Visuelle</span>
+                            <span class="tag">Design</span>
+                        </div>
+                        <h3>Branding pour Olugux</h3>
+                        <p>
+                            J'ai réalisé l'identité visuelle complète d'Olugux (logo, charte graphique, slogan), 
+                            conçu des supports de communication, et développé sa présence en ligne à travers 
+                            un site vitrine et des visuels adaptés aux réseaux sociaux.
+                        </p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2024 - Présent</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Olugux</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="details_projet_olugux.html" class="btn btn-outline btn-small">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="logo">
+                        <h3>TSALASE</h3>
+                    </div>
+                    <p>Designer Web & Graphique, Expert UI/UX et Développeur FullStack</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../../index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="projects.html">Projets</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-moi</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tsalase Joseph. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Gestion du menu mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navList = document.querySelector('.nav-list');
+            const body = document.body;
+
+            menuToggle.addEventListener('click', function() {
+                // Toggle la classe 'active' sur le bouton hamburger
+                menuToggle.classList.toggle('active');
+                
+                // Toggle la classe 'active' sur la liste de navigation
+                navList.classList.toggle('active');
+                
+                // Empêcher le scroll du body quand le menu est ouvert
+                body.classList.toggle('no-scroll');
+            });
+
+            // Fermer le menu si on clique sur un lien
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navList.classList.remove('active');
+                    body.classList.remove('no-scroll');
+                });
+            });
+
+            // Fermer le menu si on clique en dehors
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navList.contains(event.target);
+                const isClickOnToggle = menuToggle.contains(event.target);
+                
+                if (!isClickInsideNav && !isClickOnToggle && navList.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    navList.classList.remove('active');
+                    body.classList.remove('no-scroll');
+                }
+            });
+        });
+
+        // Filtrage des projets
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Retirer la classe active de tous les boutons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Ajouter la classe active au bouton cliqué
+                    button.classList.add('active');
+                    
+                    // Obtenir la catégorie de filtre
+                    const filter = button.getAttribute('data-filter');
+                    
+                    // Filtrer les projets
+                    projectCards.forEach(card => {
+                        if (filter === 'all') {
+                            card.style.display = 'block';
+                        } else {
+                            const categories = card.getAttribute('data-category').split(' ');
+                            if (categories.includes(filter)) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

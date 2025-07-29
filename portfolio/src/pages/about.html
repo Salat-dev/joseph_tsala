@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="À propos de Tsalase Joseph - Designer Web & Graphique, Expert UI/UX et Développeur FullStack">
+    <title>À propos - Tsalase Joseph</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <!-- Si dark-mode.css existe et est utilisé ailleurs -->
+    <!-- <link rel="stylesheet" href="../css/dark-mode.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles pour les boutons d'authentification dans le menu mobile */
+        .mobile-auth-buttons {
+            display: none; /* Caché par défaut sur desktop */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .mobile-auth-buttons .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Sur mobile, cacher les boutons desktop et afficher les boutons mobile */
+        @media (max-width: 768px) {
+            .auth-buttons {
+                display: none !important; /* Cacher les boutons desktop sur mobile */
+            }
+
+            .mobile-auth-buttons {
+                display: flex !important; /* Afficher les boutons mobile */
+            }
+
+            /* Ajuster la position des boutons dans le menu mobile */
+            .nav-list li.mobile-auth-buttons {
+                margin-top: var(--spacing-xl);
+                padding-top: var(--spacing-md);
+                border-top: 1px solid var(--border); /* Ligne de séparation */
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-auth-buttons {
+                display: none !important; /* Toujours caché sur desktop */
+            }
+        }
+
+        /* Ajout d'un espacement en haut pour compenser le header fixe */
+        .about-section {
+            padding-top: 100px; /* Hauteur du header + un peu d'espace */
+            background-color: var(--background);
+            min-height: 100vh; /* S'assure que la section prend toute la hauteur */
+            padding-bottom: 2rem; /* Espace en bas */
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Conteneur principal utilisant Grid pour séparer le contenu principal et la sidebar */
+        .about-content {
+            display: grid;
+            /* Sur mobile: 1 colonne. Sur desktop: 2 colonnes (2fr pour le contenu principal, 1fr pour la sidebar) */
+            grid-template-columns: 1fr;
+            gap: 2rem; /* Espace entre le contenu principal et la sidebar */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 992px) {
+            .about-content {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Section principale */
+        .about-main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem; /* Espace entre les sections principales */
+        }
+
+        /* Style pour les sections principales */
+        .about-intro,
+        .skills-section,
+        .languages-section {
+            background-color: var(--surface);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .about-intro h2,
+        .skills-section h2,
+        .languages-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .about-intro p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Grille pour les compétences */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background-color: var(--background);
+            border-radius: var(--border-radius-md);
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .skill-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-list li i {
+            color: var(--success);
+            margin-top: 0.25rem; /* Aligner l'icône avec le texte */
+        }
+
+        /* Grille pour les langues */
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .language-item {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--background);
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border);
+        }
+
+        .language-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .language-item p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Sidebar */
+        /*  .about-sidebar {
+           La sidebar prendra la taille de son contenu ou de la grille 
+        }
+*/
+        /* Carte de profil dans la sidebar */
+        .profile-card {
+            background-color: var(--surface);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            position: sticky;
+            top: 120px; /* Pour qu'elle suive le défilement, en tenant compte du header */
+        }
+
+        .profile-image {
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            margin: 0 auto;
+        }
+
+        .profile-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .profile-info p {
+            margin-bottom: 0.25rem;
+            color: var(--text-secondary);
+        }
+
+        .btn-block {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* === Styles spécifiques pour la Navbar Responsive === */
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: var(--spacing-md);
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            font-weight: 500;
+            text-decoration: none;
+            padding: var(--spacing-xs) 0;
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width var(--transition-fast);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        /* Bouton Hamburger */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001; /* Doit être supérieur au z-index du menu */
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-primary);
+            transition: all 0.3s linear;
+            position: relative;
+            transform-origin: center;
+        }
+
+        /* États pour l'animation du hamburger */
+        .menu-toggle.active .hamburger-line:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .hamburger-line:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Styles pour le menu mobile */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-list {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: var(--spacing-xl);
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 1000;
+                padding: 0;
+                margin: 0;
+            }
+
+            .nav-list.active {
+                transform: translateX(0);
+            }
+
+            .nav-list li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-link {
+                font-size: var(--font-size-xl);
+                padding: var(--spacing-sm) 0;
+            }
+
+            .auth-buttons {
+                position: absolute;
+                top: calc(70px + var(--spacing-lg)); /* Ajustez selon la hauteur de votre header */
+                flex-direction: column;
+                width: 80%;
+                gap: var(--spacing-sm);
+            }
+
+            .auth-buttons .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .about-section {
+                padding-top: 80px; /* Un peu moins d'espace sur mobile */
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .about-intro,
+            .skills-section,
+            .languages-section,
+            .profile-card {
+                padding: 1.5rem;
+            }
+
+            .about-intro h2,
+            .skills-section h2,
+            .languages-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .skills-grid,
+            .languages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-placeholder {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-section {
+                padding-top: 70px;
+            }
+
+            .profile-placeholder {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+        }
+
+        /* Empêcher le scroll quand le menu est ouvert */
+        body.no-scroll {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+       <!-- Header -->
+       <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h2>TSALASE</h2>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="about.html" class="nav-link active">À propos</a></li>
+                    <li><a href="projects.html" class="nav-link">Projets</a></li>
+                    <li><a href="experience.html" class="nav-link">Expérience</a></li>
+                    <!-- Déplacer les boutons ici pour le menu mobile -->
+                    <li class="mobile-auth-buttons">
+                        <button id="loginBtn" class="btn btn-outline" onclick="window.location.href='../pages/contact.html'">Contact</button>        
+
+                    </li>
+                </ul>
+                <!-- Garder les boutons ici aussi pour le desktop -->
+                <div class="auth-buttons">
+                    <button id="loginBtn" class="btn btn-outline" onclick="window.location.href='../pages/contact.html'">Contact</button>        
+
+                </div>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>À propos de moi</h1>
+                <p>Découvrez mon parcours et mes compétences</p>
+            </div>
+
+            <div class="about-content">
+                <!-- Contenu principal -->
+                <div class="about-main">
+                    <div class="about-intro">
+                        <h2>Qui suis-je ?</h2>
+                        <p>
+                            Analyste programmeur, designer UI/UX et designer graphique polyvalent, 
+                            je suis animé par le désir de contribuer au succès des projets. 
+                            Doté d'une grande curiosité et d'un sens aigu de l'innovation, 
+                            je suis constamment à la recherche de nouvelles façons d'optimiser 
+                            les processus et d'améliorer l'expérience utilisateur.
+                        </p>
+                        <p>
+                            Avec une solide formation en informatique et en design, j'ai eu l'opportunité 
+                            de travailler sur des projets variés allant du design d'identité visuelle 
+                            à la création d'applications web complexes. Mon objectif est de créer des 
+                            solutions numériques qui allient esthétique, fonctionnalité et performance.
+                        </p>
+                    </div>
+
+                    <div class="skills-section">
+                        <h2>Compétences Techniques</h2>
+                        <div class="skills-grid">
+                            <div class="skill-category">
+                                <h3>Design</h3>
+                                <ul class="skill-list">
+                                    <li><i class="fas fa-check"></i> Design Graphique</li>
+                                    <li><i class="fas fa-check"></i> UI/UX Design</li>
+                                    <li><i class="fas fa-check"></i> Prototypage</li>
+                                    <li><i class="fas fa-check"></i> Adobe Photoshop</li>
+                                    <li><i class="fas fa-check"></i> Figma</li>
+                                    <li><i class="fas fa-check"></i> Framer</li>
+                                    <li><i class="fas fa-check"></i> Canvas</li>
+                                </ul>
+                            </div>
+
+                            <div class="skill-category">
+                                <h3>Développement</h3>
+                                <ul class="skill-list">
+                                    <li><i class="fas fa-check"></i> HTML5/CSS3</li>
+                                    <li><i class="fas fa-check"></i> JavaScript</li>
+                                    <li><i class="fas fa-check"></i> React.js</li>
+                                    <li><i class="fas fa-check"></i> Supabase</li>
+                                    <li><i class="fas fa-check"></i> No-Code</li>
+                                    <li><i class="fas fa-check"></i> CMS</li>
+                                    <li><i class="fas fa-check"></i> FullStack</li>
+                                </ul>
+                            </div>
+
+                            <div class="skill-category">
+                                <h3>Soft Skills</h3>
+                                <ul class="skill-list">
+                                    <li><i class="fas fa-check"></i> Freelancing</li>
+                                    <li><i class="fas fa-check"></i> Service bureautique</li>
+                                    <li><i class="fas fa-check"></i> Gestion du stress</li>
+                                    <li><i class="fas fa-check"></i> Collaboration</li>
+                                    <li><i class="fas fa-check"></i> Analyse informatique</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="languages-section">
+                        <h2>Langues</h2>
+                        <div class="languages-grid">
+                            <div class="language-item">
+                                <h3>Français</h3>
+                                <p>Langue maternelle</p>
+                            </div>
+                            <div class="language-item">
+                                <h3>Anglais</h3>
+                                <p>Niveau intermédiaire</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="about-sidebar">
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <div class="profile-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <h3>Tsalase Joseph</h3>
+                            <p>Designer Web & Graphique</p>
+                            <p>Expert UI/UX & Frontend</p>
+                        </div>
+                        <div class="profile-contact">
+                            <a href="mailto:josephtsalase@gmail.com" class="btn btn-primary btn-block">
+                                <i class="fas fa-envelope"></i> Me contacter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="logo">
+                        <h3>TSALASE</h3>
+                    </div>
+                    <p>Designer Web & Graphique, Expert UI/UX et Développeur FullStack</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../../index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="projects.html">Projets</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-moi</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tsalase Joseph. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Gestion du menu mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navList = document.querySelector('.nav-list');
+            const body = document.body;
+
+            menuToggle.addEventListener('click', function() {
+                // Toggle la classe 'active' sur le bouton hamburger
+                menuToggle.classList.toggle('active');
+                
+                // Toggle la classe 'active' sur la liste de navigation
+                navList.classList.toggle('active');
+                
+                // Empêcher le scroll du body quand le menu est ouvert
+                body.classList.toggle('no-scroll');
+            });
+
+            // Fermer le menu si on clique sur un lien
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navList.classList.remove('active');
+                    body.classList.remove('no-scroll');
+                });
+            });
+
+            // Fermer le menu si on clique en dehors
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navList.contains(event.target);
+                const isClickOnToggle = menuToggle.contains(event.target);
+                
+                if (!isClickInsideNav && !isClickOnToggle && navList.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    navList.classList.remove('active');
+                    body.classList.remove('no-scroll');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

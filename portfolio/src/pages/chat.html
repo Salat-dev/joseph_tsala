@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chat avec Tsalase Joseph - Designer Web & Graphique, Expert UI/UX et Développeur FullStack">
+    <title>Chat - Tsalase Joseph</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <!-- Si dark-mode.css existe et est utilisé -->
+    <!-- <link rel="stylesheet" href="../css/dark-mode.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Ajout d'un espacement en haut pour compenser le header fixe */
+        .chat-section {
+            padding-top: 100px; /* Hauteur du header + un peu d'espace */
+            background-color: var(--background);
+            min-height: calc(100vh - 100px); /* Prendre en compte le padding-top */
+            padding-bottom: 2rem; /* Espace en bas */
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Conteneur principal du chat */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--surface);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            height: calc(100vh - 200px); /* Ajuster la hauteur pour s'adapter à l'écran */
+        }
+
+        /* En-tête du chat */
+        .chat-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h2 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #10b981; /* Vert pour en ligne */
+        }
+
+        /* Zone des messages */
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background-color: var(--background);
+        }
+
+        /* Style pour un message */
+        .message {
+            display: flex;
+            gap: 1rem;
+            max-width: 80%;
+        }
+
+        .message.received {
+            align-self: flex-start;
+        }
+
+        .message.sent {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            flex-shrink: 0;
+        }
+
+        .avatar-placeholder {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .message-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message-text {
+            padding: 0.75rem 1rem;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .message.received .message-text {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-top-left-radius: 0;
+        }
+
+        .message.sent .message-text {
+            background-color: var(--primary);
+            color: white;
+            border-top-right-radius: 0;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .message.sent .message-time {
+            text-align: right;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Zone de saisie */
+        .chat-input-area {
+            padding: 1rem;
+            background-color: var(--surface);
+            border-top: 1px solid var(--border);
+        }
+
+        .chat-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius-md);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .send-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-md);
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .send-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .chat-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .attachment-button,
+        .emoji-button {
+            background-color: var(--background);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius-md);
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .attachment-button:hover,
+        .emoji-button:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .chat-section {
+                padding-top: 80px; /* Un peu moins d'espace sur mobile */
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                min-height: calc(100vh - 80px);
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .chat-container {
+                height: calc(100vh - 160px);
+                border-radius: var(--border-radius-md);
+            }
+
+            .chat-header {
+                padding: 0.75rem 1rem;
+            }
+
+            .chat-header h2 {
+                font-size: 1.1rem;
+            }
+
+            .message {
+                max-width: 90%;
+            }
+
+            .input-group input {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.95rem;
+            }
+
+            .send-button {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chat-section {
+                padding-top: 70px;
+                min-height: calc(100vh - 70px);
+            }
+
+            .chat-container {
+                height: calc(100vh - 140px);
+                border-radius: 0;
+            }
+
+            .message {
+                max-width: 95%;
+            }
+
+            .message-text {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .chat-actions {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h2>TSALASE</h2>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="./index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="about.html" class="nav-link">À propos</a></li>
+                    <li><a href="projects.html" class="nav-link">Projets</a></li>
+                    <li><a href="experience.html" class="nav-link">Expérience</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+              <!-- <div class="auth-buttons">
+                    <button id="loginBtn" class="btn btn-outline" onclick="window.location.href='../pages/chat.html'">Discutons-ensemble</button>        
+                    <button id="signupBtn" class="btn btn-primary">Inscription</button>
+                </div>-->  
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Chat Section -->
+    <section class="chat-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Chat Direct</h1>
+                <p>Discutez avec moi en temps réel</p>
+            </div>
+            
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2>Conversation avec Tsalase Joseph</h2>
+                    <div class="chat-status">
+                        <span class="status-indicator"></span>
+                        <span>En ligne</span>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message received">
+                        <div class="message-avatar">
+                            <div class="avatar-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">
+                                Bonjour ! Je suis Tsalase Joseph. Comment puis-je vous aider aujourd'hui ?
+                            </div>
+                            <div class="message-time">10:00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="message sent">
+                        <div class="message-content">
+                            <div class="message-text">
+                                Bonjour ! J'aimerais en savoir plus sur vos services de design web.
+                            </div>
+                            <div class="message-time">10:02</div>
+                        </div>
+                        <div class="message-avatar">
+                            <div class="avatar-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="message received">
+                        <div class="message-avatar">
+                            <div class="avatar-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">
+                                Avec plaisir ! Je propose des services de design web modernes et responsives. 
+                                Je peux créer des sites vitrines, des applications web ou refondre votre identité visuelle. 
+                                Quel type de projet avez-vous en tête ?
+                            </div>
+                            <div class="message-time">10:03</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-area">
+                    <form id="chatForm" class="chat-form">
+                        <div class="input-group">
+                            <input type="text" id="messageInput" placeholder="Tapez votre message..." required>
+                            <button type="submit" class="send-button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="chat-actions">
+                            <button type="button" class="attachment-button" title="Joindre un fichier">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                            <button type="button" class="emoji-button" title="Insérer un emoji">
+                                <i class="fas fa-smile"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="logo">
+                        <h3>TSALASE</h3>
+                    </div>
+                    <p>Designer Web & Graphique, Expert UI/UX et Développeur FullStack</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../../index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="projects.html">Projets</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-moi</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tsalase Joseph. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Gestion du formulaire de chat
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatForm = document.getElementById('chatForm');
+            const messageInput = document.getElementById('messageInput');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            if (chatForm) {
+                chatForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const message = messageInput.value.trim();
+                    if (message) {
+                        // Ajouter le message à l'interface
+                        addMessageToChat(message, 'sent');
+                        messageInput.value = '';
+                        
+                        // Faire défiler vers le bas
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        
+                        // Simuler une réponse après un court délai
+                        setTimeout(() => {
+                            simulateResponse();
+                        }, 1000);
+                    }
+                });
+            }
+            
+            // Fonction pour ajouter un message au chat
+            function addMessageToChat(text, type) {
+                const messageElement = document.createElement('div');
+                messageElement.className = `message ${type}`;
+                
+                const now = new Date();
+                const timeString = now.getHours().toString().padStart(2, '0') + ':' + 
+                                  now.getMinutes().toString().padStart(2, '0');
+                
+                if (type === 'sent') {
+                    messageElement.innerHTML = `
+                        <div class="message-content">
+                            <div class="message-text">${escapeHtml(text)}</div>
+                            <div class="message-time">${timeString}</div>
+                        </div>
+                        <div class="message-avatar">
+                            <div class="avatar-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    messageElement.innerHTML = `
+                        <div class="message-avatar">
+                            <div class="avatar-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">${escapeHtml(text)}</div>
+                            <div class="message-time">${timeString}</div>
+                        </div>
+                    `;
+                }
+                
+                chatMessages.appendChild(messageElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Fonction pour simuler une réponse
+            function simulateResponse() {
+                const responses = [
+                    "Merci pour votre message. Je vous répondrai dès que possible.",
+                    "Intéressant ! Pouvez-vous me donner plus de détails sur votre projet ?",
+                    "Je comprends votre demande. Je vais préparer une proposition adaptée.",
+                    "Excellente question ! Voici ce que je peux vous proposer...",
+                    "Je suis disponible pour discuter de votre projet. Quand seriez-vous libre pour un appel ?"
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addMessageToChat(randomResponse, 'received');
+            }
+            
+            // Fonction pour échapper le HTML (sécurité)
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            // Défilement automatique vers le bas au chargement
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+    </script>
+</body>
+</html>

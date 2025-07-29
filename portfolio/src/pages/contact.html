@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contactez Tsalase Joseph - Designer Web & Graphique, Expert UI/UX et Développeur FullStack">
+    <title>Contact - Tsalase Joseph</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <!-- <link rel="stylesheet" href="../css/dark-mode.css"> Si vous utilisez le mode sombre -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Ajout d'un espacement en haut pour compenser le header fixe */
+        .contact-section {
+            padding-top: 100px; /* Hauteur du header + un peu d'espace */
+            background-color: var(--background);
+            min-height: calc(100vh - 100px); /* Prendre en compte le padding-top */
+            padding-bottom: 2rem; /* Espace en bas */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* === Styles spécifiques pour la Navbar Responsive === */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: var(--spacing-md);
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            font-weight: 500;
+            text-decoration: none;
+            padding: var(--spacing-xs) 0;
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width var(--transition-fast);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        /* Bouton Hamburger */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-primary);
+            transition: all 0.3s linear;
+            position: relative;
+            transform-origin: center;
+        }
+
+        /* États pour l'animation du hamburger */
+        .menu-toggle.active .hamburger-line:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .hamburger-line:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Styles pour le menu mobile */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-list {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: var(--spacing-xl);
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 1000;
+                padding: 0;
+                margin: 0;
+            }
+
+            .nav-list.active {
+                transform: translateX(0);
+            }
+
+            .nav-list li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-link {
+                font-size: var(--font-size-xl);
+                padding: var(--spacing-sm) 0;
+            }
+
+            /* Styles pour les boutons dans le menu mobile */
+            .mobile-auth-buttons {
+                display: flex !important;
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                width: 80%;
+                margin-top: var(--spacing-md);
+                padding-top: var(--spacing-lg);
+                border-top: 1px solid var(--border);
+            }
+
+            .mobile-auth-buttons .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Cacher les boutons desktop sur mobile */
+            .auth-buttons {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            /* Cacher les boutons mobile sur desktop */
+            .mobile-auth-buttons {
+                display: none !important;
+            }
+        }
+
+        /* Empêcher le scroll quand le menu est ouvert */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* === Styles pour la section Contact === */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 992px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* Section du formulaire */
+        .contact-form-section {
+            background-color: var(--surface);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .contact-form-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        /* Formulaire */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Pour les champs côte à côte sur desktop */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius-md);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn-block {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* Section des informations de contact */
+        .contact-info-section {
+            background-color: var(--surface);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .contact-info-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        /* Informations de contact individuelles */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+
+        .contact-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .contact-details p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Liens sociaux */
+        .social-links-section {
+            margin-bottom: 2rem;
+        }
+
+        .social-links-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius-md);
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .social-link i {
+            font-size: 1rem;
+        }
+
+        /* Disponibilité */
+        .availability {
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: var(--border-radius-md);
+            padding: 1rem;
+        }
+
+        .availability h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .availability p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .availability p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--text-primary);
+            color: white;
+            padding: 2rem 0 1rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer h3, .footer h4 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer p {
+            color: #cbd5e1;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links-footer {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links-footer a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .social-links-footer a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        /* Responsive design */
+        @media (max-width: 992px) {
+            .contact-section {
+                padding-top: 120px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-section {
+                padding-top: 100px;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .contact-form-section,
+            .contact-info-section {
+                padding: 1.5rem;
+            }
+            
+            .contact-form-section h2,
+            .contact-info-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .form-group input,
+            .form-group textarea {
+                padding: 0.6rem;
+                font-size: 0.95rem;
+            }
+            
+            .btn-block {
+                padding: 0.7rem;
+                font-size: 0.95rem;
+            }
+            
+            .contact-item {
+                gap: 0.75rem;
+            }
+            
+            .contact-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .contact-details h3 {
+                font-size: 1.1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .social-links-footer {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-section {
+                padding-top: 90px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .contact-form-section,
+            .contact-info-section {
+                padding: 1rem;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .social-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h2>TSALASE</h2>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="about.html" class="nav-link">À propos</a></li>
+                    <li><a href="projects.html" class="nav-link">Projets</a></li>
+                    <li><a href="experience.html" class="nav-link">Expérience</a></li>
+                    <!-- Boutons d'authentification pour le menu mobile -->
+                    <li class="mobile-auth-buttons">
+                        <button id="loginBtn" class="btn btn-outline" onclick="window.location.href='../pages/contact.html'">Contact</button>        
+
+                    </li>
+                </ul>
+                <!-- Boutons d'authentification pour desktop -->
+                <div class="auth-buttons">
+                    <button id="loginBtn" class="btn btn-outline" onclick="window.location.href='../pages/contact.html'">Contact</button>        
+
+                </div>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Contactez-moi</h1>
+                <p>Discutons de votre prochain projet</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-form-section">
+                    <h2>Envoyez-moi un message</h2>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nom complet</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-paper-plane"></i> Envoyer le message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="contact-info-section">
+                    <h2>Informations de contact</h2>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <p>josephtsalase@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Téléphone</h3>
+                                <p>(+237) 693 421 348</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Localisation</h3>
+                                <p>Yaoundé, Cameroun</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links-section">
+                        <h3>Suivez-moi sur les réseaux</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-linkedin-in"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-dribbble"></i>
+                                <span>Dribbble</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                                <span>Twitter</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="availability">
+                        <h3>Disponibilité</h3>
+                        <p>
+                            <i class="fas fa-circle" style="color: #10b981;"></i>
+                            Disponible pour des projets freelance
+                        </p>
+                        <p>
+                            <i class="fas fa-clock"></i>
+                            Réponse sous 24-48 heures
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="logo">
+                        <h3>TSALASE</h3>
+                    </div>
+                    <p>Designer Web & Graphique, Expert UI/UX et Développeur FullStack</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="projects.html">Projets</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-moi</h4>
+                    <div class="social-links-footer">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tsalase Joseph. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/chat.js"></script>
+    <script>
+        // Gestion du menu mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navList = document.querySelector('.nav-list');
+            const body = document.body;
+
+            menuToggle.addEventListener('click', function() {
+                // Toggle la classe 'active' sur le bouton hamburger
+                menuToggle.classList.toggle('active');
+                
+                // Toggle la classe 'active' sur la liste de navigation
+                navList.classList.toggle('active');
+                
+                // Empêcher le scroll du body quand le menu est ouvert
+                body.classList.toggle('no-scroll');
+            });
+
+            // Fermer le menu si on clique sur un lien
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navList.classList.remove('active');
+                    body.classList.remove('no-scroll');
+                });
+            });
+
+            // Fermer le menu si on clique en dehors
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navList.contains(event.target);
+                const isClickOnToggle = menuToggle.contains(event.target);
+                
+                if (!isClickInsideNav && !isClickOnToggle && navList.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    navList.classList.remove('active');
+                    body.classList.remove('no-scroll');
+                }
+            });
+
+            // Gestion du formulaire de contact
+            const contactForm = document.getElementById('contactForm');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Récupérer les données du formulaire
+                    const formData = new FormData(contactForm);
+                    const data = Object.fromEntries(formData);
+                    
+                    // Simulation d'envoi (en réalité, vous utiliseriez une API)
+                    console.log('Formulaire soumis:', data);
+                    
+                    // Afficher une notification de succès
+                    if (window.portfolio && typeof window.portfolio.showNotification === 'function') {
+                        window.portfolio.showNotification(
+                            'Message envoyé',
+                            'Merci pour votre message. Je vous répondrai dans les plus brefs délais.',
+                            'success'
+                        );
+                    } else {
+                        // Notification de secours si le système global n'est pas chargé
+                        alert('Merci pour votre message. Je vous répondrai dans les plus brefs délais.');
+                    }
+                    
+                    // Réinitialiser le formulaire
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

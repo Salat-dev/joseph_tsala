@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Connexion à votre compte - Tsalase Joseph">
+    <title>Connexion - Tsalase Joseph</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: var(--background);
+            font-family: var(--font-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem;
+        }
+
+        .auth-container {
+            background-color: var(--background);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 450px;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .auth-header p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .auth-form {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius-md);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .remember-me input {
+            margin: 0;
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-google {
+            background-color: #4285f4;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-google:hover {
+            background-color: #3367d6;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: var(--error);
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error);
+            border-radius: var(--border-radius-md);
+            padding: 0.75rem;
+            margin-bottom: 1.25rem;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 1.5rem;
+            }
+            
+            .auth-header h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>Connexion</h1>
+            <p>Accédez à votre compte</p>
+        </div>
+        
+        <div id="errorMessage" class="error-message"></div>
+        
+        <form id="loginForm" class="auth-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <div class="form-options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Se souvenir de moi</label>
+                </div>
+                <a href="#" class="forgot-password">Mot de passe oublié?</a>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Se connecter</button>
+        </form>
+        
+        <button id="googleLogin" class="btn btn-google">
+            <i class="fab fa-google"></i> Continuer avec Google
+        </button>
+        
+        <div class="auth-footer">
+            <p>Pas encore de compte? <a href="register.html">S'inscrire</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Masquer le message d'erreur au départ
+            errorMessage.style.display = 'none';
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Validation simple
+                if (!email || !password) {
+                    showError('Veuillez remplir tous les champs');
+                    return;
+                }
+                
+                // Simulation de connexion (dans un vrai backend, vous enverriez une requête à votre API)
+                simulateLogin(email, password);
+            });
+            
+            document.getElementById('googleLogin').addEventListener('click', function() {
+                // Simulation de connexion Google
+                simulateGoogleLogin();
+            });
+            
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                
+                // Cacher automatiquement après 5 secondes
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+            }
+            
+            function simulateLogin(email, password) {
+                // Simulation d'un délai de chargement
+                const submitButton = loginForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+                submitButton.textContent = 'Connexion en cours...';
+                submitButton.disabled = true;
+                
+                // Simulation d'une requête API
+                setTimeout(() => {
+                    // Réinitialiser le bouton
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                    
+                    // Vérification des identifiants (simulation)
+                    if (email === 'demo@example.com' && password === 'demo123') {
+                        // Connexion réussie
+                        localStorage.setItem('user', JSON.stringify({
+                            email: email,
+                            authenticated: true,
+                            name: 'Utilisateur Demo'
+                        }));
+                        
+                        // Redirection vers la page d'accueil
+                        window.location.href = '../../index.html';
+                    } else {
+                        showError('Email ou mot de passe incorrect');
+                    }
+                }, 1500);
+            }
+            
+            function simulateGoogleLogin() {
+                const googleButton = document.getElementById('googleLogin');
+                const originalText = googleButton.innerHTML;
+                googleButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connexion avec Google...';
+                googleButton.disabled = true;
+                
+                // Simulation d'une connexion Google
+                setTimeout(() => {
+                    googleButton.innerHTML = originalText;
+                    googleButton.disabled = false;
+                    
+                    // Simulation d'une connexion réussie
+                    localStorage.setItem('user', JSON.stringify({
+                        email: 'googleuser@example.com',
+                        authenticated: true,
+                        name: 'Utilisateur Google'
+                    }));
+                    
+                    // Redirection vers la page d'accueil
+                    window.location.href = '../../index.html';
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>

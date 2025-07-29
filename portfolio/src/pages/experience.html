@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Expérience professionnelle de Tsalase Joseph - Designer Web & Graphique, Expert UI/UX et Développeur FullStack">
+    <title>Expérience - Tsalase Joseph</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <!-- <link rel="stylesheet" href="../css/dark-mode.css"> Si vous utilisez le mode sombre -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Ajout d'un espacement en haut pour compenser le header fixe */
+        .experience-section {
+            padding-top: 100px; /* Hauteur du header + un peu d'espace */
+            background-color: var(--background);
+            min-height: calc(100vh - 100px); /* Prendre en compte le padding-top */
+            padding-bottom: 2rem; /* Espace en bas */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* === Styles spécifiques pour la Navbar Responsive === */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: var(--spacing-md);
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            font-weight: 500;
+            text-decoration: none;
+            padding: var(--spacing-xs) 0;
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width var(--transition-fast);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        /* Bouton Hamburger */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-primary);
+            transition: all 0.3s linear;
+            position: relative;
+            transform-origin: center;
+        }
+
+        /* États pour l'animation du hamburger */
+        .menu-toggle.active .hamburger-line:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .hamburger-line:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Styles pour le menu mobile */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-list {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: var(--spacing-xl);
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 1000;
+                padding: 0;
+                margin: 0;
+            }
+
+            .nav-list.active {
+                transform: translateX(0);
+            }
+
+            .nav-list li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-link {
+                font-size: var(--font-size-xl);
+                padding: var(--spacing-sm) 0;
+            }
+
+            /* Styles pour les boutons dans le menu mobile */
+            .mobile-auth-buttons {
+                display: flex !important;
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                width: 80%;
+                margin-top: var(--spacing-md);
+                padding-top: var(--spacing-lg);
+                border-top: 1px solid var(--border);
+            }
+
+            .mobile-auth-buttons .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Cacher les boutons desktop sur mobile */
+            .auth-buttons {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            /* Cacher les boutons mobile sur desktop */
+            .mobile-auth-buttons {
+                display: none !important;
+            }
+        }
+
+        /* Empêcher le scroll quand le menu est ouvert */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* === Styles pour la section Expérience === */
+        .experience-content {
+            display: grid;
+            grid-template-columns: 1fr; /* Une seule colonne par défaut */
+            gap: 3rem; /* Espace entre les sections */
+        }
+
+        /* Section Timeline */
+        .timeline-section {
+            margin-bottom: 2rem;
+        }
+
+        .timeline-section h2,
+        .education-section h2,
+        .associations-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .timeline-section h2::after,
+        .education-section h2::after,
+        .associations-section h2::after {
+             content: '';
+             position: absolute;
+             bottom: 0;
+             left: 0;
+             width: 60px; /* Longueur de la ligne */
+             height: 3px;
+             background-color: var(--primary);
+             border-radius: 2px;
+         }
+
+        /* Style pour la timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Ligne centrale de la timeline */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--border);
+            left: 20px; /* Aligné avec les marqueurs */
+            margin-left: -2px; /* Centrer la ligne sur le marqueur */
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 50px; /* Espace pour le marqueur */
+        }
+
+        .timeline-marker {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 4px solid var(--background);
+            box-shadow: 0 0 0 2px var(--primary);
+            left: 10px; /* Positionné sur la ligne */
+            top: 5px;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .timeline-content h4 {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .timeline-content p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .timeline-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Section Éducation */
+        .education-timeline {
+             position: relative;
+             max-width: 800px;
+             margin: 0 auto 2rem auto; /* Ajout de marge en bas */
+         }
+
+         .education-timeline::before {
+             content: '';
+             position: absolute;
+             top: 0;
+             bottom: 0;
+             width: 4px;
+             background-color: var(--border);
+             left: 20px;
+             margin-left: -2px;
+         }
+
+        .education-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 50px;
+        }
+
+        .education-date {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .education-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .education-content h4 {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .education-content p {
+            margin-bottom: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Section Associations */
+        .association-item {
+            background-color: var(--surface);
+            border-radius: var(--border-radius-md);
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            max-width: 800px;
+            margin: 0 auto 1rem auto; /* Centrer et ajouter de l'espace en bas */
+        }
+
+        .association-item:last-child {
+             margin-bottom: 0; /* Pas de marge en bas pour le dernier */
+         }
+
+        .association-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .association-item h4 {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .association-item p {
+            margin-bottom: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--text-primary);
+            color: white;
+            padding: 2rem 0 1rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer h3, .footer h4 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer p {
+            color: #cbd5e1;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .experience-section {
+                padding-top: 120px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .experience-section {
+                padding-top: 100px;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .timeline-section h2,
+            .education-section h2,
+            .associations-section h2 {
+                font-size: 1.7rem;
+            }
+
+             .timeline,
+             .education-timeline {
+                 padding: 0 1rem; /* Un peu de padding sur les côtés sur mobile */
+             }
+             
+             .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .experience-section {
+                padding-top: 90px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .timeline-item,
+            .education-item {
+                padding-left: 40px; /* Moins de padding sur très petit écran */
+            }
+
+            .timeline::before,
+            .education-timeline::before {
+                left: 15px; /* Ajuster la ligne centrale */
+            }
+
+            .timeline-marker {
+                left: 5px; /* Ajuster le marqueur */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h2>TSALASE</h2>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="about.html" class="nav-link">À propos</a></li>
+                    <li><a href="projects.html" class="nav-link">Projets</a></li>
+                    <li><a href="experience.html" class="nav-link active">Expérience</a></li>
+                    <!-- Boutons d'authentification pour le menu mobile -->
+                    <li class="mobile-auth-buttons">
+                        <button id="loginBtn" class="btn btn-outline" onclick="window.location.href='../pages/contact.html'">Contact</button>        
+
+                    </li>
+                </ul>
+                <!-- Boutons d'authentification pour desktop -->
+                <div class="auth-buttons">
+                    <button id="loginBtn" class="btn btn-outline" onclick="window.location.href='../pages/contact.html'">Contact</button>        
+
+                </div>
+                <!-- Bouton hamburger pour mobile -->
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Experience Section -->
+    <section class="experience-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Mon Parcours</h1>
+                <p>Expériences professionnelles et formations</p>
+            </div>
+
+            <div class="experience-content">
+                <!-- Timeline des Expériences -->
+                <div class="timeline-section">
+                    <h2>Expériences Professionnelles</h2>
+                    <div class="timeline">
+                        <!-- Expérience actuelle -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-date">2024 - Présent</div>
+                            <div class="timeline-content">
+                                <h3>Créateur de marque et Designer Web</h3>
+                                <h4>Olugux</h4>
+                                <p>
+                                    Création de marque et design web en freelance.
+                                    Refonte d'identité visuelle et design d'interfaces modernes.
+                                </p>
+                                <div class="timeline-tags">
+                                    <span class="tag">Freelance</span>
+                                    <span class="tag">Branding</span>
+                                    <span class="tag">UI/UX</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kem Tchop -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-content">
+                                <h3>Designer Graphique et Concepteur Web</h3>
+                                <h4>Kem Tchop</h4>
+                                <p>
+                                    Freelance en design graphique et conception web.
+                                    Analyse du système de l'entreprise avec UML.
+                                    Réalisation des visuels pour les contenus des réseaux sociaux.
+                                    Conception du site web avec des fonctionnalités de réservation en ligne, 
+                                    formulaire de contact, blog et page d'accueil en No-code.
+                                </p>
+                                <div class="timeline-tags">
+                                    <span class="tag">Freelance</span>
+                                    <span class="tag">Web Design</span>
+                                    <span class="tag">Social Media</span>
+                                    <span class="tag">No-Code</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MyLumen -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-date">2023</div>
+                            <div class="timeline-content">
+                                <h3>Stage Académique en Développement Web</h3>
+                                <h4>MyLumen</h4>
+                                <p>
+                                    Stage académique en développement web.
+                                    Mise en place, conception et réalisation d'une application de gestion des patients.
+                                    Analyse du système de l'entreprise avec UML.
+                                </p>
+                                <div class="timeline-tags">
+                                    <span class="tag">Stage</span>
+                                    <span class="tag">Développement</span>
+                                    <span class="tag">FullStack</span>
+                                    <span class="tag">UML</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fédération Camerounaise de Karaté -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-date">2021 - 2024</div>
+                            <div class="timeline-content">
+                                <h3>Arbitre Technique</h3>
+                                <h4>Fédération Camerounaise de Karaté</h4>
+                                <p>
+                                    Participation aux différents championnats de karaté.
+                                    Mise en place du dispositif de compétition : tatami, câblage,
+                                    installation et configuration des écrans, arbitrage numérique,
+                                    timing et projection des scores pendant les combats.
+                                    Collaboration avec près de 15 officiels pendant le championnat.
+                                    Service bureautique : impression des documents de compétition.
+                                    Gestion du stress.
+                                </p>
+                                <div class="timeline-tags">
+                                    <span class="tag">Sports</span>
+                                    <span class="tag">Organisation</span>
+                                    <span class="tag">Technique</span>
+                                    <span class="tag">Bureautique</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fédération Camerounaise de Karaté (Stage) -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-content">
+                                <h3>Stage Académique en Développement Web</h3>
+                                <h4>Fédération Camerounaise de Karaté</h4>
+                                <p>
+                                    Analyse du système de l'entreprise avec UML.
+                                    Mise en place, conception et réalisation d'une application de gestion des compétitions de karaté.
+                                    Réalisation de la charte graphique de l'application.
+                                    Conception de l'identité visuelle et refonte du logo.
+                                </p>
+                                <div class="timeline-tags">
+                                    <span class="tag">Stage</span>
+                                    <span class="tag">Développement</span>
+                                    <span class="tag">Design</span>
+                                    <span class="tag">UML</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fondation E'elikia -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-date">Actuel</div>
+                            <div class="timeline-content">
+                                <h3>Designer Graphique</h3>
+                                <h4>Fondation E'elikia</h4>
+                                <p>
+                                    Participant à l'ouverture du restaurant.
+                                    Réalisation des visuels et des supports comme les cartes de menus.
+                                </p>
+                                <div class="timeline-tags">
+                                    <span class="tag">Design</span>
+                                    <span class="tag">Print</span>
+                                    <span class="tag">Branding</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Formations -->
+                <div class="education-section">
+                    <h2>Formations</h2>
+                    <div class="education-timeline">
+                        <div class="education-item">
+                            <div class="education-date">2024</div>
+                            <div class="education-content">
+                                <h3>Diplôme d'Ingénieur des Travaux Informatique en Génie Logiciel</h3>
+                                <h4>Institut Africain d'Informatique</h4>
+                                <p>Formation approfondie en génie logiciel, développement et architecture système.</p>
+                            </div>
+                        </div>
+
+                        <div class="education-item">
+                            <div class="education-date">2023</div>
+                            <div class="education-content">
+                                <h3>Diplôme de Technicien Supérieur en Génie Logiciel</h3>
+                                <h4>Institut Africain d'Informatique</h4>
+                                <p>Spécialisation en développement logiciel et technologies web.</p>
+                            </div>
+                        </div>
+
+                        <div class="education-item">
+                            <div class="education-date">2021</div>
+                            <div class="education-content">
+                                <h3>Baccalauréat en Sciences de la Vie et de la Terre</h3>
+                                <h4>Écologie, Hygiène et Biotechnologie</h4>
+                                <p>Formation scientifique avec spécialisation en biologie et environnement.</p>
+                            </div>
+                        </div>
+
+                        <div class="education-item">
+                            <div class="education-date">2021</div>
+                            <div class="education-content">
+                                <h3>Initiation en Infographie et Marketing</h3>
+                                <h4>Institut Africain d'Informatique</h4>
+                                <p>Première formation en design graphique et marketing digital.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Associations -->
+                <div class="associations-section">
+                    <h2>Associations</h2>
+                    <div class="association-item">
+                        <h3>Membre de l'ACAFEI</h3>
+                        <h4>Association Camerounaise des Femmes Informaticiennes</h4>
+                        <p>Participation active à la promotion des femmes dans les métiers de l'informatique au Cameroun.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="logo">
+                        <h3>TSALASE</h3>
+                    </div>
+                    <p>Designer Web & Graphique, Expert UI/UX et Développeur FullStack</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../../index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="projects.html">Projets</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-moi</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tsalase Joseph. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Gestion du menu mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navList = document.querySelector('.nav-list');
+            const body = document.body;
+
+            menuToggle.addEventListener('click', function() {
+                // Toggle la classe 'active' sur le bouton hamburger
+                menuToggle.classList.toggle('active');
+                
+                // Toggle la classe 'active' sur la liste de navigation
+                navList.classList.toggle('active');
+                
+                // Empêcher le scroll du body quand le menu est ouvert
+                body.classList.toggle('no-scroll');
+            });
+
+            // Fermer le menu si on clique sur un lien
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navList.classList.remove('active');
+                    body.classList.remove('no-scroll');
+                });
+            });
+
+            // Fermer le menu si on clique en dehors
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navList.contains(event.target);
+                const isClickOnToggle = menuToggle.contains(event.target);
+                
+                if (!isClickInsideNav && !isClickOnToggle && navList.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    navList.classList.remove('active');
+                    body.classList.remove('no-scroll');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
